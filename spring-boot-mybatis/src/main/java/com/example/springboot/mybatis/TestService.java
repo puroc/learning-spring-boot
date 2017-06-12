@@ -21,7 +21,7 @@ public class TestService implements CommandLineRunner {
 //        final User user = userMapper.selectByPrimaryKey((long) 1);
 //        System.out.println(user.getName());
         userMapper.insert(new User(){{
-            this.setName("pud");
+            this.setName("lala");
         }});
         System.out.println("aaa");
     }
