@@ -1,13 +1,12 @@
-package com.example.springboot.mybatis;
+package com.example.springboot.ui;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootMybatisApplication  {
+public class SpringBootUiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootMybatisApplication.class, args);
+		SpringApplication.run(SpringBootUiApplication.class, args);
 	}
-
 }
