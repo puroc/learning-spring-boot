@@ -6,7 +6,10 @@
 	<groupId>com.example.spring.boot</groupId>
 	<artifactId>learning-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <modules>
+        <module>spring-boot-netty</module>
+    </modules>
+    <packaging>pom</packaging>
 
 	<name>learning-spring-boot</name>
 	<description>Demo project for Spring Boot</description>

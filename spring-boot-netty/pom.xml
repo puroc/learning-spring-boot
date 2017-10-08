@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>learning-spring-boot</artifactId>
+        <groupId>com.example.spring.boot</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example.spring.boot</groupId>
+    <artifactId>spring-boot-netty</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-netty4</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.11</version>
+                <configuration>
+                    <serverId>docker-harbor</serverId>
+                    <imageName>10.10.30.166/platform/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <!--<imageTags>-->
+                    <!--<imageTag>latest</imageTag>-->
+                    <!--</imageTags>-->
+                </configuration>
+                <!--<execution>-->
+                <!--<id>push-image</id>-->
+                <!--<phase>deploy</phase>-->
+                <!--<goals>-->
+                <!--<goal>push</goal>-->
+                <!--</goals>-->
+                <!--<configuration>-->
+                <!--<serverId>docker-harbor</serverId>-->
+                <!--<imageName>10.10.30.166/public/${project.artifactId}</imageName>-->
+                <!--</configuration>-->
+                <!--</execution>-->
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
