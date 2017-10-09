@@ -31,11 +31,11 @@ public class TcpClientHandler extends ChannelInboundHandlerAdapter {
             @Override
             public void run() {
                 while (true) {
-                    ByteBuf buf = Unpooled.buffer(TcpClient.SIZE);
+                    ByteBuf buf = Unpooled.buffer(256);
                     buf.writeBytes(MSG.getBytes());
                     ctx.writeAndFlush(buf);
                     try {
-                        Thread.sleep(100000);
+                        Thread.sleep(30000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

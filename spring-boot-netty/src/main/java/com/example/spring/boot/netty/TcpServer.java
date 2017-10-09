@@ -28,10 +28,19 @@ import io.netty.handler.logging.LoggingHandler;
 
 public final class TcpServer {
 
-    static final int PORT = 8007;
     public static final TcpServerHandler TCP_SERVER_HANDLER = new TcpServerHandler();
 
-    public static void main(String[] args) throws Exception {
+    private int port;
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void bind() {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -52,14 +61,17 @@ public final class TcpServer {
                     });
 
             // Start the server.
-            ChannelFuture f = b.bind(PORT);
+            ChannelFuture f = b.bind(port).sync();
 
             // Wait until the server socket is closed.
-//            f.channel().closeFuture().sync();
+            f.channel().closeFuture().sync();
+        } catch (Throwable e) {
+            e.printStackTrace();
         } finally {
             // Shut down all event loops to terminate all threads.
-//            bossGroup.shutdownGracefully();
-//            workerGroup.shutdownGracefully();
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
         }
     }
+
 }

@@ -25,61 +25,56 @@ import io.netty.handler.codec.string.StringDecoder;
 
 public final class TcpClient {
 
-    static final String HOST = "127.0.0.1";
-    static final int PORT = 8007;
-    static final int SIZE = 256;
-    static final int NUM = 5;
+    private String address;
 
-    public static void main(String[] args) throws Exception {
-        final TcpClient tcpClient = new TcpClient();
-        for (int i = 0; i < NUM; i++) {
-            tcpClient.connectServer();
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//
-//                    } catch (Throwable e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }).start();
-        }
+    private int connNum;
+
+    public String getAddress() {
+        return address;
     }
 
-    private void connectServer() throws InterruptedException {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                EventLoopGroup group = new NioEventLoopGroup();
-                try {
-                    Bootstrap b = new Bootstrap();
-                    b.group(group)
-                            .channel(NioSocketChannel.class)
-                            .option(ChannelOption.TCP_NODELAY, true)
-                            .handler(new ChannelInitializer<SocketChannel>() {
-                                @Override
-                                public void initChannel(SocketChannel ch) throws Exception {
-                                    ChannelPipeline p = ch.pipeline();
-                                    //p.addLast(new LoggingHandler(LogLevel.INFO));
-                                    p.addLast(new LineBasedFrameDecoder(1024));
-                                    p.addLast(new StringDecoder());
-                                    p.addLast(new TcpClientHandler());
-                                }
-                            });
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-                    // Start the client.
-                    ChannelFuture f = b.connect(HOST, PORT);
+    public int getConnNum() {
+        return connNum;
+    }
 
-                    // Wait until the connection is closed.
+    public void setConnNum(int connNum) {
+        this.connNum = connNum;
+    }
+
+    public void connectServer() {
+        for (int i = 0; i < connNum; i++) {
+            EventLoopGroup group = new NioEventLoopGroup();
+            try {
+                Bootstrap b = new Bootstrap();
+                b.group(group)
+                        .channel(NioSocketChannel.class)
+                        .option(ChannelOption.TCP_NODELAY, true)
+                        .handler(new ChannelInitializer<SocketChannel>() {
+                            @Override
+                            public void initChannel(SocketChannel ch) throws Exception {
+                                ChannelPipeline p = ch.pipeline();
+                                //p.addLast(new LoggingHandler(LogLevel.INFO));
+                                p.addLast(new LineBasedFrameDecoder(1024));
+                                p.addLast(new StringDecoder());
+                                p.addLast(new TcpClientHandler());
+                            }
+                        });
+
+                // Start the client.
+                ChannelFuture f = b.connect(address.split(":")[0], Integer.parseInt(address.split(":")[1])).sync();
+
+                // Wait until the connection is closed.
 //            f.channel().closeFuture().sync();
-                } finally {
-                    // Shut down the event loop to terminate all threads.
+            } catch (Throwable e) {
+                e.printStackTrace();
+            } finally {
+                // Shut down the event loop to terminate all threads.
 //            group.shutdownGracefully();
-                }
             }
         }
-        ).start();
-
     }
 }

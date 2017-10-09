@@ -35,8 +35,7 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
-//            System.out.println("connNum:" + connNum.get());
-//            connNum.set(0);
+            System.out.println("connNum:" + connNum.get());
         }
     }
 
@@ -52,10 +51,13 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
-        int i = connNum.incrementAndGet();
-        System.out.println(ctx.channel().remoteAddress() + " session active haha [" + i + "]" + Thread.currentThread
-                ().getName()
-        );
+        connNum.incrementAndGet();
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+        connNum.decrementAndGet();
     }
 
     @Override
