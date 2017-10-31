@@ -29,13 +29,15 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
     private Timer timer = new Timer();
     private AtomicInteger connNum = new AtomicInteger();
+    private AtomicInteger msgNum = new AtomicInteger();
 
 
     class MyTimerTask extends TimerTask {
 
         @Override
         public void run() {
-            System.out.println("connNum:" + connNum.get());
+            System.out.println("connNum:" + connNum.get()+",msgNum:"+msgNum.get());
+            msgNum.set(0);
         }
     }
 
@@ -62,6 +64,7 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        msgNum.incrementAndGet();
 //        System.out.println("server receive:" + msg);
     }
 

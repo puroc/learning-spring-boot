@@ -24,6 +24,11 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class TcpClientHandler extends ChannelInboundHandlerAdapter {
 
     public static final String MSG = "123\r\n";
+    private final TcpClient tcpClient;
+
+    public TcpClientHandler(TcpClient tcpClient){
+        this.tcpClient= tcpClient;
+    }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -35,7 +40,7 @@ public class TcpClientHandler extends ChannelInboundHandlerAdapter {
                     buf.writeBytes(MSG.getBytes());
                     ctx.writeAndFlush(buf);
                     try {
-                        Thread.sleep(30000);
+                        Thread.sleep(tcpClient.getInterval());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

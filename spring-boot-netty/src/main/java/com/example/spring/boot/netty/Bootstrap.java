@@ -7,11 +7,12 @@ public class Bootstrap {
 
 
     public static void main(String[] args) throws Exception {
-        //client 127.0.0.1:8007 50
+        //client 127.0.0.1:8007 50 1000
         if (args[0].equalsIgnoreCase("client")) {
             TcpClient tcpClient = new TcpClient();
             tcpClient.setAddress(args[1]);
             tcpClient.setConnNum(Integer.parseInt(args[2]));
+            tcpClient.setInterval(Integer.parseInt(args[3]));
             tcpClient.connectServer();
         }
         //server 8007

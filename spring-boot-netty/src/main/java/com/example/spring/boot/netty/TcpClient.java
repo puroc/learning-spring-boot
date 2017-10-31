@@ -29,6 +29,16 @@ public final class TcpClient {
 
     private int connNum;
 
+    private int interval;
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -60,7 +70,7 @@ public final class TcpClient {
                                 //p.addLast(new LoggingHandler(LogLevel.INFO));
                                 p.addLast(new LineBasedFrameDecoder(1024));
                                 p.addLast(new StringDecoder());
-                                p.addLast(new TcpClientHandler());
+                                p.addLast(new TcpClientHandler(TcpClient.this));
                             }
                         });
 

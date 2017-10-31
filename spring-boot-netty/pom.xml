@@ -47,9 +47,10 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <!--<imageTags>-->
-                    <!--<imageTag>latest</imageTag>-->
-                    <!--</imageTags>-->
+                    <imageTags>
+                        <tag>client</tag>
+                        <imageTag>client</imageTag>
+                    </imageTags>
                 </configuration>
             </plugin>
         </plugins>
