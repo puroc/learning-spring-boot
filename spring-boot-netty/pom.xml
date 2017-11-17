@@ -48,8 +48,8 @@
                         </resource>
                     </resources>
                     <imageTags>
-                        <tag>client</tag>
-                        <imageTag>client</imageTag>
+                        <tag>server</tag>
+                        <imageTag>server</imageTag>
                     </imageTags>
                 </configuration>
             </plugin>
