@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://10.10.30.191:5432/postgres</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">123456</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <property name="hibernate.connection.autocommit">false</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="show_sql">true</property>
+        <!--         <property name="hibernate.hbm2ddl.auto" >create</property> -->
+        <property name="hibernate.multiTenancy">SCHEMA</property>
+        <!-- hibernate.tenant_identifier_resolver属性规定了一个合约，以使 Hibernate 能够解析出应用当前的 tenantId，-->
+        <!-- 该类必须实现 CurrentTenantIdentifierResolver 接口，通常我们可以从登录信息中获得 tenatId。 -->
+        <property name="hibernate.tenant_identifier_resolver">com.example.springboot.dao.TenantIdResolver</property>
+
+        <!-- 指定了 ConnectionProvider，即 Hibernate 需要知道如何以租户特有的方式获取数据连接 -->
+        <property name="hibernate.multi_tenant_connection_provider">
+            com.example.springboot.dao.SchemaBasedMultiTenantConnectionProvider
+        </property>
+
+        <mapping class="com.example.springboot.domain.Guest"/>
+        <!-- <mapping resource="hotel/model/Guest.hbm.xml" /> -->
+    </session-factory>
+</hibernate-configuration> 
