@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf8
     username: root
     password: 123456
 #    执行初始化脚本
@@ -10,3 +10,6 @@ mybatis:
     type-aliases-package: com.example.springboot.mybatis.model
     mapper-locations: classpath:/com/example/springboot/mybatis/mapper/*.xml
     config-location: classpath:/mybatis-config.xml
+
+logging:
+    config: classpath:logback-spring.xml

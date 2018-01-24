@@ -8,6 +8,12 @@
 	<version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>spring-boot-netty</module>
+		<module>spring-boot-ui</module>
+		<module>spring-boot-mybatis</module>
+		<module>spring-boot-web</module>
+		<module>spring-boot-jdbc</module>
+		<module>spring-boot-hibernate</module>
+		<module>spring-boot-hibernate5</module>
     </modules>
     <packaging>pom</packaging>
 

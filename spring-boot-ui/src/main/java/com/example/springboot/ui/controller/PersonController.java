@@ -14,7 +14,7 @@ public class PersonController {
 
     @RequestMapping("/list")
     public ModelAndView list(ModelMap model){
-        model.addAttribute("name","pudong");
+        model.addAttribute("name","zhangsan");
         return new ModelAndView("person/list",model);
     }
 }

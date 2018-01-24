@@ -8,8 +8,8 @@
         <property name="dialect" value="mysql" />
     </properties>
     <settings>
-        <!-- 这个配置使全局的映射器启用或禁用缓存。系统默认值是true，设置只是为了展示出来 -->
-        <setting name="cacheEnabled" value="true" />
+        <!-- 这个配置使全局的映射器启用或禁用缓存。系统默认值是true，但开启缓存，会出现脏数据的问题，所以关掉 -->
+        <setting name="cacheEnabled" value="false" />
         <!-- 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载。 系统默认值是true，设置只是为了展示出来 -->
         <setting name="lazyLoadingEnabled" value="true" />
         <!-- 允许或不允许多种结果集从一个单独的语句中返回（需要适合的驱动）。 系统默认值是true，设置只是为了展示出来 -->

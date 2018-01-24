@@ -1,9 +1,7 @@
 package com.example.springboot.mybatis.mapper;
 
 import com.example.springboot.mybatis.domain.User;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 

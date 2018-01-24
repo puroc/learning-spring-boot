@@ -10,6 +10,7 @@ import org.hibernate.service.spi.Stoppable;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 
 /**
@@ -40,12 +41,18 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         final Connection connection = getAnyConnection();
+        Statement statement = null;
         try {
 //            connection.createStatement().execute("USE " + tenantIdentifier);
-            connection.createStatement().execute("set schema '" + tenantIdentifier + "'");
+            statement = connection.createStatement();
+            statement.execute("set schema '" + tenantIdentifier + "'");
         } catch (SQLException e) {
             throw new HibernateException("Could not alter JDBC connection to specified schema [" + tenantIdentifier
                     + "]", e);
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
         }
         return connection;
     }
@@ -53,12 +60,18 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
 
     @Override
     public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
+        Statement statement = null;
         try {
 //            connection.createStatement().execute("USE test");
-            connection.createStatement().execute("set schema 'test'");
+            statement = connection.createStatement();
+            statement.execute("set schema 'test'");
         } catch (SQLException e) {
             throw new HibernateException("Could not alter JDBC connection to specified schema [" + tenantIdentifier
                     + "]", e);
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
         }
         connectionProvider.closeConnection(connection);
     }
