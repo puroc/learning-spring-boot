@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form id="loginForm" class="form-horizontal" action="/user/login" method="post">
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" class="btn btn-default" value="Submit" />
+                    <!--<button id="btn" type="submit" class="btn btn-default">Sign in</button>-->
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+
+
+</div>
+
+<!--<script>-->
+    <!--$(function () {-->
+        <!--$("#btn").click(function () {-->
+            <!--var username = $("#username").val();-->
+            <!--var password = $("#password").val();-->
+            <!--if ($.trim(username) == "" || $.trim(password) == "") {-->
+                <!--alert(" 您的[客户号]或者[验证码]必须填写！");-->
+                <!--return false;-->
+            <!--}-->
+            <!--else {-->
+                <!--document.loginForm.submit();-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+</body>
+
+</html>
