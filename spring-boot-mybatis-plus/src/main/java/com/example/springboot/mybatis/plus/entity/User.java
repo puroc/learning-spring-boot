@@ -2,7 +2,6 @@ package com.example.springboot.mybatis.plus.entity;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -15,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author pud123
- * @since 2018-01-25
+ * @since 2018-01-27
  */
 public class User extends Model<User> {
 
@@ -28,7 +27,6 @@ public class User extends Model<User> {
     private Long roleId;
     private Integer age;
     @TableField("deleteFlag")
-    @TableLogic
     private Integer deleteFlag;
 
 

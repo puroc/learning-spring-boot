@@ -29,7 +29,8 @@ public class Generator {
         config.setActiveRecord(true)
                 .setAuthor("pud")
                 .setOutputDir("/Users/puroc/IdeaProjects/learning-spring-boot/spring-boot-mybatis-plus/src/main/java")
-                .setFileOverride(true);
+                .setFileOverride(true)
+                .setEnableCache(false);
         new AutoGenerator().setGlobalConfig(config)
                 .setDataSource(dataSourceConfig)
                 .setStrategy(strategyConfig)

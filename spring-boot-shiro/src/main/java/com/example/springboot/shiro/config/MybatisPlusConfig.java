@@ -1,4 +1,4 @@
-package com.example.springboot.shiro;
+package com.example.springboot.shiro.config;
 
 import com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
