@@ -9,15 +9,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MybatisTestcase {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Test
+    public void find() {
+        int id = userMapper.find("zhangsan");
+        System.out.println(id);
+        Assert.isTrue(id==2);
+    }
 
     @Test
     public void selectByPrimaryKey() {

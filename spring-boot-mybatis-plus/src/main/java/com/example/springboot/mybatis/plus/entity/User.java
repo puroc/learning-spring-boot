@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author pud123
- * @since 2018-01-27
+ * @since 2018-01-28
  */
 public class User extends Model<User> {
 

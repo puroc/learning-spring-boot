@@ -9,8 +9,9 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author pud123
- * @since 2018-01-27
+ * @since 2018-01-28
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    int find(String zhangsan);
 }

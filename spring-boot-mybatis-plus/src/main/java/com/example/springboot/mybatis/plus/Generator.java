@@ -28,7 +28,7 @@ public class Generator {
                 .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
         config.setActiveRecord(true)
                 .setAuthor("pud")
-                .setOutputDir("/Users/puroc/IdeaProjects/learning-spring-boot/spring-boot-mybatis-plus/src/main/java")
+                .setOutputDir("/Users/puroc/IdeaProjects/learning-spring-boot/spring-boot-mybatis-plus/output")
                 .setFileOverride(true)
                 .setEnableCache(false);
         new AutoGenerator().setGlobalConfig(config)

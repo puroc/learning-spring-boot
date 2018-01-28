@@ -71,15 +71,15 @@ public class ShiroConfiguration {
 //        shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<>();
-        filterChainDefinitionManager.put("/logout", "logout");
-        filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
-        filterChainDefinitionManager.put("/shop/**", "authc,roles[shop]");
-        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
-        filterChainDefinitionManager.put("/**", "anon");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
+//        filterChainDefinitionManager.put("/logout", "logout");
+//        filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
+//        filterChainDefinitionManager.put("/shop/**", "authc,roles[shop]");
+//        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
+//        filterChainDefinitionManager.put("/**", "anon");
+//        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
         shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/");
+        shiroFilterFactoryBean.setSuccessUrl("/main");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
         return shiroFilterFactoryBean;
