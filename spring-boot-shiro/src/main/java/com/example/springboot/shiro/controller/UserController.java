@@ -1,6 +1,11 @@
 package com.example.springboot.shiro.controller;
 
 
+import com.baomidou.mybatisplus.mapper.Condition;
+import com.example.springboot.shiro.entity.User;
+import com.example.springboot.shiro.service.IUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,11 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    private IUserService userService;
 
-    @RequestMapping("/test")
+    @RequiresPermissions("admin:user:view")
+    @RequestMapping("/list")
     @ResponseBody
-    public String haha() {
-        return "123";
+    public String list() {
+        User user = userService.selectOne(Condition.create().eq("username", "admin"));
+        return user.getUsername();
     }
 
 

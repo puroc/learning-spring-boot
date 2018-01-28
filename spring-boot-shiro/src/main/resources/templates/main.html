@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>main</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
 <body>
-main haha
+<button name="btn" id="btn">come on</button>
+<div id="myDiv"><h2>通过 AJAX 改变文本</h2></div>
+
+<script type="text/javascript">
+    $(function(){
+        //按钮单击时执行
+        $("#btn").click(function(){
+            //取Ajax返回结果
+            //为了简单，这里简单地从文件中读取内容作为返回数据
+            htmlobj=$.ajax({url:"/user/list",async:false});
+            //显示Ajax返回结果
+            $("#myDiv").html(htmlobj.responseText);
+        });
+    });
+</script>
+
 </body>
 </html>
