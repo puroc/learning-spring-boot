@@ -1,0 +1,21 @@
+{
+  "name": "spring-boot-shiro",
+  "homepage": "https://github.com/puroc/learning-spring-boot",
+  "authors": [
+    "puroc <p00u00r00>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^3.3.1",
+    "bootstrap": "^3.3.7"
+  }
+}
