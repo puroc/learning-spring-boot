@@ -1,14 +1,18 @@
 package com.example.springboot.shiro.controller;
 
 
-import com.baomidou.mybatisplus.mapper.Condition;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.example.springboot.shiro.entity.User;
 import com.example.springboot.shiro.service.IUserService;
+import com.example.springboot.shiro.table.TableData;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * <p>
@@ -29,8 +33,16 @@ public class UserController {
     @RequestMapping("/list")
     @ResponseBody
     public String list() {
-        User user = userService.selectOne(Condition.create().eq("username", "admin"));
-        return user.getUsername();
+        List<User> list = userService.selectList(new EntityWrapper<User>());
+        TableData<User> td = new TableData<User>();
+        td.getData().addAll(list);
+        return td.toJson();
+    }
+
+    @RequiresPermissions("admin:user:create")
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public void addUser(User user){
+        System.out.println(user.getUsername());
     }
 
 

@@ -3,25 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <title>main</title>
+    <script src="bower_components/jQuery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+    <link href="bower_components/datatables/media/css/jquery.dataTables.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+
 </head>
 <body>
-<button name="btn" id="btn">come on</button>
-<div id="myDiv"><h2>通过 AJAX 改变文本</h2></div>
+<div class="container">
 
-<script type="text/javascript">
-    $(function(){
-        //按钮单击时执行
-        $("#btn").click(function(){
-            //取Ajax返回结果
-            //为了简单，这里简单地从文件中读取内容作为返回数据
-            htmlobj=$.ajax({url:"/user/list",async:false});
-            //显示Ajax返回结果
-            $("#myDiv").html(htmlobj.responseText);
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
+    <!--  定义模态框触发器，此处为按钮触发  -->
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+            <div class="modal-dialog">
+                <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+                <div class="modal-content">
+                    <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+
+                    <div class="btn-info modal-header">
+                        <!--  模态框标题  -->
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <!--  关闭按钮  -->
+                        <h4>您好，欢迎进入模态框</h4>
+                        <!--  标题内容  -->
+                    </div>
+
+                    <div class="modal-body">
+                        <!--  模态框内容，我在此处添加一个表单 -->
+                        <form class="form-horizontal" role="form" id="userForm" action="/user/add" method="post">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">用户名</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="username" name="username" class="form-control well"
+                                           placeholder="请输入用户名"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" id="password" name="password" class="form-control well"
+                                           placeholder="请输入密码"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                        <button type="submit" class="btn btn-info" id="submitbutton">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div>
+        </div> <!-- /.modal -->
+</div>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>password</th>
+        <th>phone</th>
+        <th>operation</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>password</th>
+        <th>phone</th>
+        <th>operation</th>
+    </tr>
+    </tfoot>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "ajax": "/user/list",
+            "columns": [
+                {"data": "id"},
+                {"data": "username"},
+                {"data": "password"},
+                {"data": "phone"}
+            ],
+            "columnDefs": [{
+                // 定义操作列,######以下是重点########
+                "targets": 4,//操作按钮目标列
+                "data": null,
+                "render": function (data, type, row) {
+                    var id = '"' + row.id + '"';
+                    var html = "<a href='javascript:void(0);'  class='delete btn btn-default btn-xs'  ><i class='fa fa-times'></i> 查看</a>"
+                    html += "<a href='javascript:void(0);' class='up btn btn-default btn-xs'><i class='fa fa-arrow-up'></i> 编辑</a>"
+                    html += "<a href='javascript:void(0);'   onclick='deleteThisRowPapser(" + id + ")'  class='down btn btn-default btn-xs'><i class='fa fa-arrow-down'></i> 删除</a>"
+                    return html;
+                }
+            }]
         });
     });
-</script>
 
+    $("#submitbutton").click(function () {//button的click事件
+        $("#userForm").submit();
+    });
+</script>
+<script></script>
 </body>
 </html>

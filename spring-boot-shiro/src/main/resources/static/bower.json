@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "jQuery": "^3.3.1",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "datatables": "datatable#^1.10.16"
   }
 }
