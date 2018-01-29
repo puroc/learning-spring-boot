@@ -10,10 +10,12 @@
         <module>spring-boot-netty</module>
 		<module>spring-boot-ui</module>
 		<module>spring-boot-mybatis</module>
+		<module>spring-boot-mybatis-plus</module>
 		<module>spring-boot-web</module>
 		<module>spring-boot-jdbc</module>
 		<module>spring-boot-hibernate</module>
 		<module>spring-boot-hibernate5</module>
+		<module>spring-boot-shiro</module>
     </modules>
     <packaging>pom</packaging>
 
