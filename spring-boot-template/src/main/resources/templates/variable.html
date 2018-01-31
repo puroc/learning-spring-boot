@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="frame/header :: header">
+
+</head>
+<!--<head >-->
+    <!--<title>Getting Started: Serving Web Content</title>-->
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<!--</head>-->
+<body>
+<p th:text="'object, ' + ${user.name} + '!'" />
+<p th:text="'object, ' + ${user.getName()} + '!'" />
+
+<p th:text="'list, ' + ${userList[0].name} + '!'" />
+<p th:text="'list, ' + ${userList[1].name} + '!'" />
+<p th:text="'list, ' + ${userList.get(2).name} + '!'" />
+
+<p th:text="'map, ' + ${userMap.containsKey('1')} + '!'" />
+<p th:text="'map, ' + ${userMap.get('1').name} + '!'" />
+<p th:text="'map, ' + ${userMap.get('2').name} + '!'" />
+<p th:text="'map, ' + ${userMap.get('3').name} + '!'" />
+
+
+</body>
+</html>
