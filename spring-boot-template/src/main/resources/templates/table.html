@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="frame/header::header"/>
+<body>
+
+<div class="bs-example" data-example-id="simple-responsive-table">
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${userList}">
+                <td th:text="${user.name}">zhangsan</td>
+                <td th:text="${user.age}">30</td>
+            </tr>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+
+<div class="bs-example" data-example-id="simple-responsive-table">
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry:${userMap.entrySet()}">
+                <td th:text="${entry.getKey()}">key</td>
+                <td th:text="${entry.getValue().name}">zhangsan</td>
+                <td th:text="${entry.getValue().age}">30</td>
+            </tr>
+            </tbody>
+        </table>
+    </div><!-- /.table-responsive -->
+</div>
+
+</body>
+<footer th:replace="frame/footer::footer"></footer>
+</html>
