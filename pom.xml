@@ -14,7 +14,8 @@
 		<module>spring-boot-hibernate</module>
 		<module>spring-boot-hibernate5</module>
 		<module>spring-boot-shiro</module>
-    </modules>
+		<module>spring-boot-template</module>
+	</modules>
     <packaging>pom</packaging>
 
 	<name>learning-spring-boot</name>
