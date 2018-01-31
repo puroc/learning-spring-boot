@@ -8,10 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>spring-boot-netty</module>
-		<module>spring-boot-thymeleaf</module>
 		<module>spring-boot-mybatis</module>
 		<module>spring-boot-mybatis-plus</module>
-		<module>spring-boot-angularjs</module>
 		<module>spring-boot-jdbc</module>
 		<module>spring-boot-hibernate</module>
 		<module>spring-boot-hibernate5</module>
