@@ -1,50 +1,85 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="frame/header::header"/>
-<body>
+<head th:replace="frame/header::header">
 
-<div class="bs-example" data-example-id="simple-responsive-table">
+</head>
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>姓名</th>
-                <th>年龄</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user:${userList}">
-                <td th:text="${user.name}">zhangsan</td>
-                <td th:text="${user.age}">30</td>
-            </tr>
-            </tbody>
-        </table>
-    </div><!-- /.table-responsive -->
-</div>
+<body class="menubar-left menubar-unfold menubar-light theme-primary">
+<!--============= start main area -->
 
-<div class="bs-example" data-example-id="simple-responsive-table">
+<div th:replace="frame/navbar::navbar"></div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>姓名</th>
-                <th>年龄</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="entry:${userMap.entrySet()}">
-                <td th:text="${entry.getKey()}">key</td>
-                <td th:text="${entry.getValue().name}">zhangsan</td>
-                <td th:text="${entry.getValue().age}">30</td>
-            </tr>
-            </tbody>
-        </table>
-    </div><!-- /.table-responsive -->
-</div>
+<div th:replace="frame/menubar::menubar"></div>
+
+<main id="app-main" class="app-main">
+    <div class="wrap">
+        <section class="app-content">
+            <div class="row">
+                <!-- Ajax dataTable -->
+                <div class="col-md-12">
+                    <div class="widget">
+                        <header class="widget-header">
+                            <h4 class="widget-title">Responsive, Keyboard Navigation</h4>
+                        </header><!-- .widget-header -->
+                        <hr class="widget-separator">
+                        <div class="widget-body">
+                            <table id="responsive-datatable" class="table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>用户名</th>
+                                    <th>密码</th>
+                                    <th>手机</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>id</th>
+                                    <th>用户名</th>
+                                    <th>密码</th>
+                                    <th>手机</th>
+                                    <th>操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div><!-- .widget-body -->
+                    </div><!-- .widget -->
+                </div><!-- END column -->
+            </div><!-- .row -->
+        </section><!-- .app-content -->
+    </div><!-- .wrap -->
+</main>
+<div th:replace="frame/addjs::addjs"></div>
+
+<script>
+    $(document).ready(function () {
+        $('#responsive-datatable').DataTable({
+            "ajax": "/user/list",
+            "columns": [
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "password"},
+                {"data": "phone"},
+                {"data": null}
+            ],
+            "columnDefs": [{
+                "targets": 4,//操作按钮目标列
+                "data": null,
+                "render": function (data, type, row) {
+                    var id = '"' + row.id + '"';
+                    var html = "<a href='javascript:void(0);'  class='btn btn-default btn-xs'  > 查看</a>"
+                    html += "<a href='javascript:void(0);' class='btn btn-default btn-xs'> 编辑</a>"
+                    html += "<a href='javascript:void(0);'   onclick='deleteThisRowPapser(" + id + ")'  class='btn btn-default btn-xs'> 删除</a>"
+                    return html;
+                }
+            }]
+
+        });
+    });
+</script>
 
 </body>
-<footer th:replace="frame/footer::footer"></footer>
+<footer th:replace="frame/footer::footer">
+
 </html>
