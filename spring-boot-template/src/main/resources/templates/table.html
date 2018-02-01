@@ -26,6 +26,7 @@
                             <table id="responsive-datatable" class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>id</th>
                                     <th>用户名</th>
                                     <th>密码</th>
@@ -35,6 +36,7 @@
                                 </thead>
                                 <tfoot>
                                 <tr>
+                                    <th></th>
                                     <th>id</th>
                                     <th>用户名</th>
                                     <th>密码</th>
@@ -54,32 +56,65 @@
 
 <script>
     $(document).ready(function () {
-        $('#responsive-datatable').DataTable({
+        var table = $('#responsive-datatable').DataTable({
+            "paging": true,//是否启用分页
+            "ordering": true,//是否启用排序
+            "order": [[0, "asc"]],//按照第几列进行升序还是降序排序，asc升序，desc降序
+            "scrollY": '50vh',//当不启用分页时(paging:false)，开启滚动条
+            "scrollCollapse": true,//当不启用分页时(paging:false)，开启滚动条
+
             "ajax": "/user/list",
             "columns": [
+                {"data": "checkbox"},
                 {"data": "id"},
                 {"data": "name"},
                 {"data": "password"},
                 {"data": "phone"},
-                {"data": null}
+                {"data": "operation"}
             ],
             "columnDefs": [{
-                "targets": 4,//操作按钮目标列
-                "data": null,
+                "targets": 0,//确定第几列用来显示checkbox
+                "data": "checkbox",
                 "render": function (data, type, row) {
                     var id = '"' + row.id + '"';
-                    var html = "<a href='javascript:void(0);'  class='btn btn-default btn-xs'  > 查看</a>"
-                    html += "<a href='javascript:void(0);' class='btn btn-default btn-xs'> 编辑</a>"
-                    html += "<a href='javascript:void(0);'   onclick='deleteThisRowPapser(" + id + ")'  class='btn btn-default btn-xs'> 删除</a>"
+                    var html = "<div class=\"checkbox\">\n" +
+                        "    <label>\n" +
+                        "      <input type=\"checkbox\">" +
+                        "    </label>\n" +
+                        "  </div>"
                     return html;
                 }
-            }]
+            },
+                {
+                    "targets": 5,//确定第几列用来显示操作按钮
+                    "data": "operation",
+                    "render": function (data, type, row) {
+                        var id = '"' + row.id + '"';
+                        var html = "<a href='javascript:void(0);'  class='btn btn-default btn-xs'  > 查看</a>"
+                        html += "<a href='javascript:void(0);' class='btn btn-default btn-xs'> 编辑</a>"
+                        html += "<a href='javascript:void(0);'   onclick='deleteThisRowPapser(" + id + ")'  class='btn btn-default btn-xs'> 删除</a>"
+                        return html;
+                    }
+                }, {
+                    "targets": [2],//确定第几列
+                    "visible": true,//该列是否可见
+                    "searchable": false//该列是否可以作为搜索条件
+                }]
 
         });
+        //在列表的每一行上增加jquery事件--begin
+        // $('#responsive-datatable tbody').on('click', 'tr', function () {
+        //     var data = table.row(this).data();
+        //     alert('You clicked on ' + data.name + '\'s row');
+        // });
+        //在列表的每一行上增加jquery事件--end
+
     });
+
+
 </script>
 
 </body>
-<footer th:replace="frame/footer::footer">
+<footer th:replace="frame/footer::footer"/>
 
 </html>
